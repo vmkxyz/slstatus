@@ -1,3 +1,12 @@
+Fork
+====
+Intended to be used with my build of dwl, or with the dwl-bar and barcolors
+patches to be more precise.
+Some scripts are being use to get specific status info, you can find them
+in my dotfiles repo (@vmkxyz).
+The signals patches was applyed.
+
+
 slstatus - suckless status
 ==========================
 slstatus is a small tool for providing system status information to other

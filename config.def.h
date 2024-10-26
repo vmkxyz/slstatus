@@ -6,8 +6,8 @@ const unsigned int interval = 1000;
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
 
-/* maximum output string length */
-#define MAXLEN 2048
+/* maximum command output length */
+#define CMDLEN 128
 
 /*
  * function            description                     argument (example)
@@ -64,6 +64,22 @@ static const char unknown_str[] = "n/a";
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+	/* function format          argument interval signal */
+//    { run_command,  "|   %s ",              "amixer sget Master | tail -1 | awk '{print $5 }' | sed 's@\\(\\[\\|\\]\\)@@g'",   1, 10  },
+    { run_command,  "| ^fg(eba0ac)%s^fg() ",                 "sb-volume",  99,  10  },
+//    { cpu_perc,     "|  %s%% ",             NULL,      5,   -1  },
+//    { ram_perc,     "|  %s%% ",             NULL,      5,   -1  },
+//    { temp,         "| ^fg(f9e2af) %s°C^fg() ",             "/sys/class/thermal/thermal_zone0/temp",   5,  -1, },
+    { run_command,  "| ^fg(f9e2af)%s^fg() ",                 "sb-temp",   5,  -1, },
+    { wifi_perc,    "| ^fg(cba6f7)  %s%%^fg() ",            "wlp3s0",  10,  -1  },
+//    { netspeed_rx,  "|  %s ",               "wlp3s0",  1,   -1  },
+//    { netspeed_tx,  "  %s ",                "wlp3s0",  1,   -1  },
+//    { battery_perc,	"| ^fg(a6e3a1)  %s%%^fg() ",            "BAT0",    20,  -1  },
+    { run_command,	"| ^fg(a6e3a1)%s^fg() ",                 "sb-batt",    20,  -1  },
+    { datetime,  	"| ^fg(f5c2e7) %s^fg() ",               "%F",      1,   -1  },
+    { datetime,  	" ^fg(f4b8e4) %s^fg() ",                "%T",      1,   -1  },
 };
+
+/* maximum output string length */
+#define MAXLEN CMDLEN * LEN(args)
+
